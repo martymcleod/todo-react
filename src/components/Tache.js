@@ -1,6 +1,8 @@
 
 const Tache = (props) => {
-    return    <li>{props.item}</li>
+
+console.log(props)
+    return    <li  >{props.item} <button onClick={() => props.deleteTache(props.id)}>X</button></li>
 }
 
 
