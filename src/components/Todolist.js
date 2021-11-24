@@ -21,7 +21,7 @@ const Todo = () => {
     const addTache = () => {
         const maxId = Math.max(...listTaches.map(o => o.id))
         console.log(maxId)
-        setListTaches([...listTaches, { id: maxId + 1, tache }]) 
+        setListTaches([...listTaches, { id: maxId + 1, tache, completed: false }]) 
     }
 
       
@@ -31,13 +31,28 @@ const Todo = () => {
         console.log('test')
     }
 
+    const completeTache= (id) =>
+    {
+        let newListTache = listTaches.map( (tache) => {
+               return  (tache.id == id) ? {...tache, completed: !tache.completed} :  {...tache}
+                
+            })
+       setListTaches(newListTache)
+    }
+
     return <div>
         <h1>Liste des taches</h1>
         <input type="text" name="tache" onChange={(e) => setTache(e.target.value)} value={tache} />
         <button onClick={addTache}>ajouter</button>
         <ul>
             {listTaches.map((item) => {
-               return  <Tache key={item.id} deleteTache={deleteTache} item={item.tache} id={item.id}/>
+               return  <Tache 
+                            key={item.id} 
+                            completeTache={completeTache}
+                            deleteTache={deleteTache} 
+                            item={item.tache} 
+                            id={item.id} 
+                            completed={item.completed} />
             })}
         </ul>
     </div>
